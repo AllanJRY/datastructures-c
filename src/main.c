@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -12,6 +13,19 @@ Linked_List_Node* linked_list_new(int head_val) {
     linked_list_head->val              = head_val;
     linked_list_head->next             = NULL;
     return linked_list_head;
+}
+
+size_t linked_list_len(Linked_List_Node* linked_list_head) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    size_t len = 1;
+    Linked_List_Node* curr_node = linked_list_head;
+    for (;curr_node->next != NULL;) {
+        len += 1;
+        curr_node = curr_node->next;
+    }
+
+    return len;
 }
 
 void linked_list_append(Linked_List_Node* linked_list_head, int val) {
@@ -71,6 +85,35 @@ void linked_list_insert(Linked_List_Node* linked_list_head, size_t idx, int val)
     }
 }
 
+bool linked_list_remove(Linked_List_Node* linked_list_head, size_t idx, int* removed_val) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+    assert(idx > 0 && "Cannot delete at index 0 with this procedure.");
+
+    size_t i = 1;
+    Linked_List_Node* prev_node = linked_list_head;
+    Linked_List_Node* curr_node = linked_list_head->next;
+    for(;i <= idx;) {
+        if (prev_node == NULL || (i == idx && curr_node == NULL)) {
+            return false;
+        }
+
+        if (i == idx) {
+            prev_node->next = curr_node->next;
+            *removed_val = curr_node->val;
+            free(curr_node);
+            return true;
+        }
+
+        i += 1;
+        prev_node = curr_node;
+        if (curr_node != NULL) {
+            curr_node = curr_node->next;
+        }
+    }
+
+    return false;
+}
+
 void linked_list_free(Linked_List_Node* linked_list_head) {
     assert(linked_list_head != NULL && "Linked List head is NULL.");
 
@@ -96,9 +139,9 @@ int main(void) {
 
     linked_list_insert(linked_list_head, 2, 5);
     linked_list_insert(linked_list_head, 5, 6);
-    linked_list_insert(linked_list_head, 7, 7); // FIXME
+    linked_list_insert(linked_list_head, 7, 7);
 
-    printf("\nSingly Linked list:");
+    printf("\nSingly Linked list before remove:");
     Linked_List_Node* curr_node = linked_list_head;
     for (;curr_node != NULL;) {
         if (curr_node != linked_list_head) {
@@ -109,7 +152,30 @@ int main(void) {
 
         curr_node = curr_node->next;
     }
+    printf(" (%llu nodes)", linked_list_len(linked_list_head));
     printf("\n");
+
+    int removed_val;
+    bool removed = linked_list_remove(linked_list_head, 1, &removed_val);
+    if(removed) {
+        printf("removed at %d = %d", 1, removed_val);
+    }
+    linked_list_remove(linked_list_head, 7, &removed_val);
+
+    printf("\nSingly Linked list after remove:");
+    curr_node = linked_list_head;
+    for (;curr_node != NULL;) {
+        if (curr_node != linked_list_head) {
+            printf(" - %d", curr_node->val);
+        } else {
+            printf(" %d", curr_node->val);
+        }
+
+        curr_node = curr_node->next;
+    }
+    printf(" (%llu nodes)", linked_list_len(linked_list_head));
+    printf("\n");
+
 
     linked_list_free(linked_list_head);
 
