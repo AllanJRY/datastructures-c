@@ -470,4 +470,10 @@ typedef struct Doubly_Linked_List_Node {
 
 Doubly_Linked_List_Node* doubly_linked_list_new(int head_val);
 
+size_t doubly_linked_list_len(Doubly_Linked_List_Node* linked_list_head);
+
+void doubly_linked_list_print(Doubly_Linked_List_Node* linked_list_head);
+
+void doubly_linked_list_print_backward(Doubly_Linked_List_Node* linked_list_head);
+
 #endif

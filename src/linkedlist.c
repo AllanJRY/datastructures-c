@@ -181,3 +181,45 @@ Doubly_Linked_List_Node* doubly_linked_list_new(int head_val) {
     head->next = NULL;
     return head;
 }
+
+size_t doubly_linked_list_len(Doubly_Linked_List_Node* linked_list_head) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    size_t len = 1;
+    Doubly_Linked_List_Node* curr_node = linked_list_head->next;
+    for(;curr_node != NULL;) {
+        len += 1;
+        curr_node = curr_node->next;
+    }
+
+    return len;
+}
+
+void doubly_linked_list_print(Doubly_Linked_List_Node* linked_list_head) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    printf("%d", linked_list_head->val);
+
+    Doubly_Linked_List_Node* curr_node = linked_list_head->next;
+    for(;curr_node != NULL;) {
+        printf(" -> %d", curr_node->val);
+        curr_node = curr_node->next;
+    }
+}
+
+void doubly_linked_list_print_backward(Doubly_Linked_List_Node* linked_list_head) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    Doubly_Linked_List_Node* last_node = linked_list_head;
+    for(;last_node->next != NULL;) {
+        last_node = last_node->next;
+    }
+
+    printf("%d", last_node->val);
+
+    Doubly_Linked_List_Node* curr_node = linked_list_head->prev;
+    for(;curr_node != NULL;) {
+        printf(" -> %d", curr_node->val);
+        curr_node = curr_node->prev;
+    }
+}

@@ -52,15 +52,20 @@ void demo_singly_linked_list(void) {
 }
 
 void demo_doubly_linked_list(void) {
-    Doubly_Linked_List_Node* doubly_linked_list = doubly_linked_list_new(1);
+    Doubly_Linked_List_Node* linked_list_head = doubly_linked_list_new(1);
 
     printf("\n# Doubly Linked List:\n");
 
-    printf("Head: %d", doubly_linked_list->val);
+    printf("Forward traversal: ");
+    doubly_linked_list_print(linked_list_head);
+    printf(" (%llu nodes)\n", doubly_linked_list_len(linked_list_head));
+    printf("Backward traversal: ");
+    doubly_linked_list_print_backward(linked_list_head);
+    printf(" (%llu nodes)\n", doubly_linked_list_len(linked_list_head));
 
     printf("\n");
 
-    free(doubly_linked_list);
+    free(linked_list_head);
 }
 
 int main(void) {
