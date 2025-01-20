@@ -1,5 +1,41 @@
 #include "linkedlist.h"
 
+/**
+ * @brief Creates a new singly linked list with a single node as the head.
+ *
+ * This function initializes a new singly linked list by allocating memory for the head node,
+ * setting its value, and pointing its `next` pointer to `NULL` to indicate the end of the list.
+ *
+ * @param head_val
+ *        The integer value to be stored in the head node of the list.
+ *
+ * @return 
+ *        A pointer to the newly created head node of the linked list.
+ *        Returns `NULL` if memory allocation fails.
+ *
+ * Example:
+ *
+ * ```c
+ * // Create a new singly linked list with the head value of 10
+ * Singly_Linked_List_Node* list_head = singly_linked_list_new(10);
+ *
+ * // Access the list
+ * printf("Head Value: %d\n", list_head->val); // Output: Head Value: 10
+ * printf("Next Node: %p\n", (void*)list_head->next); // Output: Next Node: (nil)
+ *
+ * // Free the allocated memory when done
+ * free(list_head);
+ * ```
+ *
+ * Notes:
+ * - The caller is responsible for managing the memory allocated by this function.
+ *   Ensure the memory is freed when the list is no longer needed.
+ * - This function only creates a single-node list. To extend the list, additional
+ *   nodes must be added manually by assigning values to the `next` pointer.
+ *
+ * Potential Errors:
+ * - If `malloc` fails due to insufficient memory, the function will return `NULL`.
+ */
 Singly_Linked_List_Node* singly_linked_list_new(int head_val) {
     Singly_Linked_List_Node* linked_list_head = (Singly_Linked_List_Node*) malloc(sizeof(Singly_Linked_List_Node));
     linked_list_head->val              = head_val;
