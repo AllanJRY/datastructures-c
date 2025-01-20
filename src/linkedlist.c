@@ -111,10 +111,10 @@ bool singly_linked_list_remove(Singly_Linked_List_Node* linked_list_head, size_t
             linked_list_head->val  = to_free->val;
             linked_list_head->next = to_free->next;
             free(to_free);
-            return true;
         } else {
             free(linked_list_head);
         }
+        return true;
     }
 
     size_t i = 1;

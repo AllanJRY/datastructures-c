@@ -43,7 +43,11 @@
 # ========= config =========
 # compiler
 CC             := gcc -c
-CFLAGS         := -march=native -Wall -Wextra -Wshadow -Wundef
+ifeq ($(OS),Windows_NT)
+	CFLAGS := -march=native -Wall -Wextra -Wshadow -Wundef -pedantic
+else
+	CFLAGS := -march=native -fsanitize=address -static-libasan -Wall -Wextra -Wshadow -Wundef -pedantic
+endif
 CFLAGS_DEBUG   := -g3
 CFLAGS_RELEASE := -O3
 CFLAG_INCLUDE  := -I
