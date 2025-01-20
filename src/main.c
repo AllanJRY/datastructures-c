@@ -16,7 +16,7 @@ void singly_linked_list_demo() {
     singly_linked_list_print(linked_list_head);
     printf(" (%llu nodes)\n", singly_linked_list_len(linked_list_head));
 
-    singly_linked_list_insert(linked_list_head, 2, 5);
+    singly_linked_list_insert(linked_list_head, 0, 5);
     singly_linked_list_insert(linked_list_head, 5, 6);
     singly_linked_list_insert(linked_list_head, 7, 7);
 
@@ -33,6 +33,11 @@ void singly_linked_list_demo() {
         bool removed = singly_linked_list_remove(linked_list_head, found_idx, &removed_val);
         if(removed) {
             printf("removed at %llu = %d\n", found_idx, removed_val);
+        }
+
+        removed = singly_linked_list_remove(linked_list_head, 0, &removed_val);
+        if(removed) {
+            printf("removed at 0 = %d\n", removed_val);
         }
         singly_linked_list_remove(linked_list_head, 7, &removed_val);
 
