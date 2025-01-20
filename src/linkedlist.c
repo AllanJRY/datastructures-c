@@ -173,3 +173,11 @@ void singly_linked_list_free(Singly_Linked_List_Node* linked_list_head) {
         free(to_free);
     }
 }
+
+Doubly_Linked_List_Node* doubly_linked_list_new(int head_val) {
+    Doubly_Linked_List_Node* head = (Doubly_Linked_List_Node*) malloc(sizeof(Doubly_Linked_List_Node));
+    head->val  = head_val;
+    head->prev = NULL;
+    head->next = NULL;
+    return head;
+}

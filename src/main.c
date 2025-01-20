@@ -4,8 +4,8 @@
 
 #include "linkedlist.h"
 
-void singly_linked_list_demo() {
-    printf("\n# Linked List:\n");
+void demo_singly_linked_list(void) {
+    printf("\n# Singly Linked List:\n");
     Singly_Linked_List_Node* linked_list_head = singly_linked_list_new(1);
 
     singly_linked_list_append(linked_list_head, 2);
@@ -51,8 +51,20 @@ void singly_linked_list_demo() {
     singly_linked_list_free(linked_list_head);
 }
 
-// TODO: Valgrind tests, to check memory leaks.
+void demo_doubly_linked_list(void) {
+    Doubly_Linked_List_Node* doubly_linked_list = doubly_linked_list_new(1);
+
+    printf("\n# Doubly Linked List:\n");
+
+    printf("Head: %d", doubly_linked_list->val);
+
+    printf("\n");
+
+    free(doubly_linked_list);
+}
+
 int main(void) {
-    singly_linked_list_demo();
+    demo_singly_linked_list();
+    demo_doubly_linked_list();
     return 0;
 }

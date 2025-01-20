@@ -462,4 +462,12 @@ bool singly_linked_list_lookup(Singly_Linked_List_Node* linked_list_head, int ne
  */
 void singly_linked_list_free(Singly_Linked_List_Node* linked_list_head);
 
+typedef struct Doubly_Linked_List_Node {
+    int val;
+    struct Doubly_Linked_List_Node* prev;
+    struct Doubly_Linked_List_Node* next;
+} Doubly_Linked_List_Node;
+
+Doubly_Linked_List_Node* doubly_linked_list_new(int head_val);
+
 #endif
