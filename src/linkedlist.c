@@ -182,6 +182,15 @@ Doubly_Linked_List_Node* doubly_linked_list_new(int head_val) {
     return head;
 }
 
+void doubly_linked_list_free(Doubly_Linked_List_Node* linked_list_head) {
+    Doubly_Linked_List_Node* curr_node = linked_list_head;
+    for(;curr_node != NULL;) {
+        Doubly_Linked_List_Node* to_free = curr_node;
+        curr_node = curr_node->next;
+        free(to_free);
+    }
+}
+
 size_t doubly_linked_list_len(Doubly_Linked_List_Node* linked_list_head) {
     assert(linked_list_head != NULL && "Linked List head is NULL.");
 
@@ -217,9 +226,39 @@ void doubly_linked_list_print_backward(Doubly_Linked_List_Node* linked_list_head
 
     printf("%d", last_node->val);
 
-    Doubly_Linked_List_Node* curr_node = linked_list_head->prev;
+    Doubly_Linked_List_Node* curr_node = last_node->prev;
     for(;curr_node != NULL;) {
         printf(" -> %d", curr_node->val);
         curr_node = curr_node->prev;
     }
+}
+
+void doubly_linked_list_append(Doubly_Linked_List_Node* linked_list_head, int val) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    Doubly_Linked_List_Node* prev_last_node = linked_list_head;
+    for(;prev_last_node->next != NULL;) {
+        prev_last_node = prev_last_node->next;
+    }
+
+    Doubly_Linked_List_Node* new_last_node = (Doubly_Linked_List_Node*) malloc(sizeof(Doubly_Linked_List_Node));
+    new_last_node->val = val;
+    new_last_node->prev = prev_last_node;
+    new_last_node->next = NULL;
+
+    prev_last_node->next = new_last_node;
+}
+
+void doubly_linked_list_prepend(Doubly_Linked_List_Node* linked_list_head, int val) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    Doubly_Linked_List_Node* prev_head_node = (Doubly_Linked_List_Node*) malloc(sizeof(Doubly_Linked_List_Node));
+    prev_head_node->val = linked_list_head->val;
+    prev_head_node->prev = linked_list_head;
+    prev_head_node->next = linked_list_head->next;
+    prev_head_node->next->prev = prev_head_node;
+
+    linked_list_head->val = val;
+    linked_list_head->next = prev_head_node;
+    linked_list_head->prev = NULL;
 }
