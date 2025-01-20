@@ -6,6 +6,57 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/**
+ * @struct Singly_Linked_List_Node
+ * @brief Represents a node in a singly linked list.
+ *
+ * This structure is used to create and manage a singly linked list, where each
+ * node contains a value (`val`) and a pointer (`next`) to the next node in the list.
+ *
+ * A singly linked list is a linear data structure where each element (node) points
+ * to the next one in the sequence. The last node in the list points to `NULL` to
+ * indicate the end of the list.
+ *
+ * Fields:
+ * - `val`:
+ *   The integer value stored in the node. This can be any value the list is meant
+ *   to manage or represent.
+ *
+ * - `next`:
+ *   A pointer to the next node in the list. If the current node is the last node,
+ *   `next` is set to `NULL`.
+ *
+ * Example:
+ * 
+ * ```c
+ * // Create nodes
+ * Singly_Linked_List_Node node1 = {10, NULL};
+ * Singly_Linked_List_Node node2 = {20, NULL};
+ * Singly_Linked_List_Node node3 = {30, NULL};
+ * 
+ * // Link nodes to form a list
+ * node1.next = &node2;
+ * node2.next = &node3;
+ * 
+ * // Iterate through the list
+ * Singly_Linked_List_Node* current = &node1;
+ * while (current != NULL) {
+ *     printf("%d -> ", current->val);
+ *     current = current->next;
+ * }
+ * printf("NULL\n");
+ * ```
+ *
+ * Output:
+ * ```
+ * 10 -> 20 -> 30 -> NULL
+ * ```
+ *
+ * Notes:
+ * - The list can grow dynamically by allocating new nodes and linking them.
+ * - Operations such as insertion, deletion, and traversal can be implemented
+ *   based on this structure.
+ */
 typedef struct Singly_Linked_List_Node {
     int val;
     struct Singly_Linked_List_Node* next;
