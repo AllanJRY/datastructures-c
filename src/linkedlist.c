@@ -426,3 +426,22 @@ bool doubly_linked_list_set(Doubly_Linked_List_Node* linked_list_head, size_t id
 
     return false;
 }
+
+Doubly_Linked_List_Node* doubly_linked_list_reverse(Doubly_Linked_List_Node* linked_list_head) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    Doubly_Linked_List_Node* curr_node = linked_list_head;
+    for( ;; ) {
+        Doubly_Linked_List_Node* tmp_prev = curr_node->prev;
+        curr_node->prev = curr_node->next;
+        curr_node->next = tmp_prev;
+
+        if(curr_node->prev == NULL) {
+            break;
+        } else {
+            curr_node = curr_node->prev;
+        }
+    }
+
+    return curr_node;
+}

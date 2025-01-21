@@ -496,4 +496,6 @@ bool doubly_linked_list_get(Doubly_Linked_List_Node* linked_list_head, size_t id
 
 bool doubly_linked_list_set(Doubly_Linked_List_Node* linked_list_head, size_t idx, int new_val);
 
+Doubly_Linked_List_Node* doubly_linked_list_reverse(Doubly_Linked_List_Node* linked_list_head);
+
 #endif
