@@ -272,7 +272,7 @@ void doubly_linked_list_insert(Doubly_Linked_List_Node* linked_list_head, size_t
     }
 
     Doubly_Linked_List_Node* curr_node = linked_list_head;
-    for(size_t i = 0; i <= idx; i++) {
+    for(size_t i = 0; i <= idx; i += 1) {
         if(curr_node == NULL) {
             return;
         }
@@ -300,4 +300,72 @@ void doubly_linked_list_insert(Doubly_Linked_List_Node* linked_list_head, size_t
 
         curr_node = curr_node->next;
     }
+}
+
+bool doubly_linked_list_remove_head(Doubly_Linked_List_Node* linked_list_head, int* removed_val) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    *removed_val = linked_list_head->val;
+    if(linked_list_head->next == NULL) {
+        free(linked_list_head);
+    } else {
+        Doubly_Linked_List_Node* to_free = linked_list_head->next;
+        linked_list_head->val = to_free->val;
+        linked_list_head->next = to_free->next;
+        if(linked_list_head->next != NULL) {
+            linked_list_head->next->prev = linked_list_head;
+        }
+        linked_list_head->prev = NULL;
+        free(to_free);
+    }
+
+    return true;
+}
+
+bool doubly_linked_list_remove_tail(Doubly_Linked_List_Node* linked_list_head, int* removed_val) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    if (linked_list_head->next == NULL) {
+        doubly_linked_list_remove_head(linked_list_head, removed_val);
+    }
+
+    Doubly_Linked_List_Node* last_node = linked_list_head;
+    for( ;last_node->next != NULL; ) {
+        last_node = last_node->next;
+    }
+
+    *removed_val = last_node->val;
+    last_node->prev->next = NULL;
+    free(last_node);
+
+    return true;
+}
+
+bool doubly_linked_list_remove(Doubly_Linked_List_Node* linked_list_head, size_t idx, int* removed_val) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    if (idx == 0) {
+        return doubly_linked_list_remove_head(linked_list_head, removed_val);
+    }
+
+    Doubly_Linked_List_Node* curr_node = linked_list_head;
+    for(size_t i = 0; i <= idx; i += 1) {
+        if (curr_node == NULL) {
+            return false;
+        }
+
+        if (i == idx) {
+            *removed_val = curr_node->val;
+            curr_node->prev->next = curr_node->next;
+            if(curr_node->next != NULL) {
+                curr_node->next->prev = curr_node->prev;
+            }
+            free(curr_node);
+            return true;
+        }
+
+        curr_node = curr_node->next;
+    }
+
+    return false;
 }
