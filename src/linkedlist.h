@@ -490,4 +490,6 @@ bool doubly_linked_list_remove_tail(Doubly_Linked_List_Node* linked_list_head, i
 
 bool doubly_linked_list_remove(Doubly_Linked_List_Node* linked_list_head, size_t idx, int* removed_val);
 
+bool doubly_linked_list_search(Doubly_Linked_List_Node* linked_list_head, int needle_val, size_t* found_idx);
+
 #endif

@@ -369,3 +369,20 @@ bool doubly_linked_list_remove(Doubly_Linked_List_Node* linked_list_head, size_t
 
     return false;
 }
+
+bool doubly_linked_list_search(Doubly_Linked_List_Node* linked_list_head, int needle_val, size_t* found_idx) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    Doubly_Linked_List_Node* curr_node = linked_list_head;
+    for(size_t i = 0; curr_node != NULL; i += 1) {
+
+        if(curr_node->val == needle_val) {
+            *found_idx = i;
+            return true;
+        }
+
+        curr_node = curr_node->next;
+    }
+
+    return false;
+}

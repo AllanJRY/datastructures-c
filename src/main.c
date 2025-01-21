@@ -73,8 +73,8 @@ void demo_doubly_linked_list(void) {
     printf("Removed head value: %d\n", removed_val);
     doubly_linked_list_remove_tail(linked_list_head, &removed_val);
     printf("Removed tail value: %d\n", removed_val);
-    doubly_linked_list_remove(linked_list_head, 1, &removed_val);
-    printf("Removed at index 1 value: %d\n",removed_val);
+    // doubly_linked_list_remove(linked_list_head, 1, &removed_val);
+    // printf("Removed at index 1 value: %d\n",removed_val);
 
     printf("Forward traversal (after remove): ");
     doubly_linked_list_print(linked_list_head);
@@ -82,6 +82,12 @@ void demo_doubly_linked_list(void) {
     printf("Backward traversal (after remove): ");
     doubly_linked_list_print_backward(linked_list_head);
     printf(" (%llu nodes)\n", doubly_linked_list_count(linked_list_head));
+
+    size_t found_idx;
+    bool found = doubly_linked_list_search(linked_list_head, 5, &found_idx);
+    if (found) {
+        printf("Value `5` found at idx: %llu", found_idx);
+    }
 
     printf("\n");
 
