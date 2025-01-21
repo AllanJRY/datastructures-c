@@ -478,8 +478,10 @@ void doubly_linked_list_print(Doubly_Linked_List_Node* linked_list_head);
 
 void doubly_linked_list_print_backward(Doubly_Linked_List_Node* linked_list_head);
 
-void doubly_linked_list_append(Doubly_Linked_List_Node* linked_list_head, int val);
+void doubly_linked_list_insert_head(Doubly_Linked_List_Node* linked_list_head, int val);
 
-void doubly_linked_list_prepend(Doubly_Linked_List_Node* linked_list_head, int val);
+void doubly_linked_list_insert_tail(Doubly_Linked_List_Node* linked_list_head, int val);
+
+void doubly_linked_list_insert(Doubly_Linked_List_Node* linked_list_head, size_t idx, int val);
 
 #endif

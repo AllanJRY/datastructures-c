@@ -233,7 +233,21 @@ void doubly_linked_list_print_backward(Doubly_Linked_List_Node* linked_list_head
     }
 }
 
-void doubly_linked_list_append(Doubly_Linked_List_Node* linked_list_head, int val) {
+void doubly_linked_list_insert_head(Doubly_Linked_List_Node* linked_list_head, int val) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    Doubly_Linked_List_Node* prev_head_node = (Doubly_Linked_List_Node*) malloc(sizeof(Doubly_Linked_List_Node));
+    prev_head_node->val = linked_list_head->val;
+    prev_head_node->prev = linked_list_head;
+    prev_head_node->next = linked_list_head->next;
+    prev_head_node->next->prev = prev_head_node;
+
+    linked_list_head->val = val;
+    linked_list_head->next = prev_head_node;
+    linked_list_head->prev = NULL;
+}
+
+void doubly_linked_list_insert_tail(Doubly_Linked_List_Node* linked_list_head, int val) {
     assert(linked_list_head != NULL && "Linked List head is NULL.");
 
     Doubly_Linked_List_Node* prev_last_node = linked_list_head;
@@ -249,16 +263,41 @@ void doubly_linked_list_append(Doubly_Linked_List_Node* linked_list_head, int va
     prev_last_node->next = new_last_node;
 }
 
-void doubly_linked_list_prepend(Doubly_Linked_List_Node* linked_list_head, int val) {
+void doubly_linked_list_insert(Doubly_Linked_List_Node* linked_list_head, size_t idx, int val) {
     assert(linked_list_head != NULL && "Linked List head is NULL.");
 
-    Doubly_Linked_List_Node* prev_head_node = (Doubly_Linked_List_Node*) malloc(sizeof(Doubly_Linked_List_Node));
-    prev_head_node->val = linked_list_head->val;
-    prev_head_node->prev = linked_list_head;
-    prev_head_node->next = linked_list_head->next;
-    prev_head_node->next->prev = prev_head_node;
+    if (idx == 0) {
+        doubly_linked_list_insert_head(linked_list_head, val);
+        return;
+    }
 
-    linked_list_head->val = val;
-    linked_list_head->next = prev_head_node;
-    linked_list_head->prev = NULL;
+    Doubly_Linked_List_Node* curr_node = linked_list_head;
+    for(size_t i = 0; i <= idx; i++) {
+        if(curr_node == NULL) {
+            return;
+        }
+
+        if (i == idx) {
+            Doubly_Linked_List_Node* new_node = (Doubly_Linked_List_Node*) malloc(sizeof(Doubly_Linked_List_Node));
+            new_node->val = val;
+            new_node->prev = curr_node->prev;
+            new_node->next = curr_node;
+
+            curr_node->prev->next = new_node;
+            curr_node->prev = new_node;
+            return;
+        }
+
+        if(i+1 == idx && curr_node->next == NULL) {
+            Doubly_Linked_List_Node* new_tail = (Doubly_Linked_List_Node*) malloc(sizeof(Doubly_Linked_List_Node));
+            new_tail->val = val;
+            new_tail->prev = curr_node;
+            new_tail->next = NULL;
+
+            curr_node->next = new_tail;
+            return;
+        }
+
+        curr_node = curr_node->next;
+    }
 }

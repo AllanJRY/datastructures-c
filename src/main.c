@@ -56,9 +56,10 @@ void demo_doubly_linked_list(void) {
 
     Doubly_Linked_List_Node* linked_list_head = doubly_linked_list_new(1);
 
-    doubly_linked_list_append(linked_list_head, 2);
-    doubly_linked_list_append(linked_list_head, 3);
-    doubly_linked_list_prepend(linked_list_head, 4);
+    doubly_linked_list_insert_tail(linked_list_head, 2);
+    doubly_linked_list_insert_tail(linked_list_head, 3);
+    doubly_linked_list_insert_head(linked_list_head, 4);
+    doubly_linked_list_insert(linked_list_head, 2, 5);
 
     printf("Forward traversal: ");
     doubly_linked_list_print(linked_list_head);
