@@ -386,3 +386,43 @@ bool doubly_linked_list_search(Doubly_Linked_List_Node* linked_list_head, int ne
 
     return false;
 }
+
+bool doubly_linked_list_get(Doubly_Linked_List_Node* linked_list_head, size_t idx, int* get_val) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    Doubly_Linked_List_Node* curr_node = linked_list_head;
+    for(size_t i = 0; i <= idx; i += 1) {
+        if (curr_node == NULL) {
+            return false;
+        }
+
+        if(i == idx) {
+            *get_val = curr_node->val;
+            return true;
+        }
+
+        curr_node = curr_node->next;
+    }
+
+    return false;
+}
+
+bool doubly_linked_list_set(Doubly_Linked_List_Node* linked_list_head, size_t idx, int new_val) {
+    assert(linked_list_head != NULL && "Linked List head is NULL.");
+
+    Doubly_Linked_List_Node* curr_node = linked_list_head;
+    for(size_t i = 0; i <= idx ; i += 1) {
+        if (curr_node == NULL) {
+            return false;
+        }
+
+        if(i == idx) {
+            curr_node->val = new_val;
+            return true;
+        }
+
+        curr_node = curr_node->next;
+    }
+
+    return false;
+}

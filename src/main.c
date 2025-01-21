@@ -86,8 +86,19 @@ void demo_doubly_linked_list(void) {
     size_t found_idx;
     bool found = doubly_linked_list_search(linked_list_head, 5, &found_idx);
     if (found) {
-        printf("Value `5` found at idx: %llu", found_idx);
+        printf("Value `5` found at idx: %llu\n", found_idx);
+        doubly_linked_list_set(linked_list_head, found_idx, 99);
+        int get_val;
+        doubly_linked_list_get(linked_list_head, found_idx, &get_val);
+        printf("Value at idx `%llu` updated to: %d\n", found_idx, get_val);
     }
+
+    printf("Forward traversal (after update): ");
+    doubly_linked_list_print(linked_list_head);
+    printf(" (%llu nodes)\n", doubly_linked_list_count(linked_list_head));
+    printf("Backward traversal (after update): ");
+    doubly_linked_list_print_backward(linked_list_head);
+    printf(" (%llu nodes)\n", doubly_linked_list_count(linked_list_head));
 
     printf("\n");
 
