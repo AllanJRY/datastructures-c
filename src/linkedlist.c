@@ -191,7 +191,7 @@ void doubly_linked_list_free(Doubly_Linked_List_Node* linked_list_head) {
     }
 }
 
-size_t doubly_linked_list_len(Doubly_Linked_List_Node* linked_list_head) {
+size_t doubly_linked_list_count(Doubly_Linked_List_Node* linked_list_head) {
     assert(linked_list_head != NULL && "Linked List head is NULL.");
 
     size_t len = 1;

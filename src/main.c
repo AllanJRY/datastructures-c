@@ -63,10 +63,10 @@ void demo_doubly_linked_list(void) {
 
     printf("Forward traversal (before remove): ");
     doubly_linked_list_print(linked_list_head);
-    printf(" (%llu nodes)\n", doubly_linked_list_len(linked_list_head));
+    printf(" (%llu nodes)\n", doubly_linked_list_count(linked_list_head));
     printf("Backward traversal (before remove): ");
     doubly_linked_list_print_backward(linked_list_head);
-    printf(" (%llu nodes)\n", doubly_linked_list_len(linked_list_head));
+    printf(" (%llu nodes)\n", doubly_linked_list_count(linked_list_head));
 
     int removed_val;
     doubly_linked_list_remove_head(linked_list_head, &removed_val);
@@ -78,10 +78,10 @@ void demo_doubly_linked_list(void) {
 
     printf("Forward traversal (after remove): ");
     doubly_linked_list_print(linked_list_head);
-    printf(" (%llu nodes)\n", doubly_linked_list_len(linked_list_head));
+    printf(" (%llu nodes)\n", doubly_linked_list_count(linked_list_head));
     printf("Backward traversal (after remove): ");
     doubly_linked_list_print_backward(linked_list_head);
-    printf(" (%llu nodes)\n", doubly_linked_list_len(linked_list_head));
+    printf(" (%llu nodes)\n", doubly_linked_list_count(linked_list_head));
 
     printf("\n");
 
