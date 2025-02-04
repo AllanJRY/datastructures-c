@@ -4,24 +4,27 @@
 
 #include "red_black_tree.h"
 
-void i32_rb_tree_init(I32_Bb_Tree* tree, size_t initial_cap) {
-    tree->nodes = (I32_Rb_Tree_Node*) malloc(sizeof(I32_Rb_Tree_Node) * initial_cap);
-    if (tree->nodes == NULL) {
-        printf("Unable to allocate memory for the RB tree backing array.");
+I32_Rb_Node* i32_rb_node_new(int root_val) {
+    I32_Rb_Node* root = (I32_Rb_Node*) malloc(sizeof(I32_Rb_Node));
+    if(root == NULL) {
+        printf("Unable to allocate memory for the red black tree root node.");
         exit(1);
     }
 
-    memset(tree->nodes, 0, sizeof(I32_Rb_Tree_Node) * initial_cap);
-    tree->len = 0;
-    tree->cap = initial_cap;
+    root->parent = NULL;
+    root->left   = NULL;
+    root->right  = NULL;
+    root->val    = root_val;
+    root->color  = NODE_BLACK;
+    return root;
 }
 
-void i32_rb_tree_free(I32_Bb_Tree* tree) {
-    free(tree->nodes);
-    tree->len = 0;
-    tree->cap = 0;
+void i32_rb_node_free(I32_Rb_Node* root) {
+    free(root);
+    // TODO
 }
 
-void i32_rb_tree_insert(I32_Bb_Tree* tree, int value) {
-    // todo
+void i32_rb_node_insert(I32_Rb_Node* root, int value) {
+    // Inset like binary search tree.
+    // Fix violations.
 }
