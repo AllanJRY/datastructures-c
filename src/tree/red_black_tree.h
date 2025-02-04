@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+typedef uint8_t Rb_Node_Color;
+
 #define NODE_BLACK 0
 #define NODE_RED   1
 
@@ -13,7 +15,7 @@ typedef struct I32_Rb_Node {
     struct I32_Rb_Node* left;
     struct I32_Rb_Node* right;
     uint32_t            val;
-    uint8_t             color;
+    Rb_Node_Color       color;
 } I32_Rb_Node;
 
 I32_Rb_Node* i32_rb_node_new(int root_val);
