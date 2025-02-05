@@ -1,6 +1,7 @@
 #ifndef RED_BLACK_TREE_H
 #define RED_BLACK_TREE_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 typedef uint8_t Rb_Node_Color;
@@ -10,16 +11,16 @@ typedef uint8_t Rb_Node_Color;
 
 // TODO: Add an implementation variation backed by arrays instead of allocating nodes.
 
-typedef struct I32_Rb_Node {
-    struct I32_Rb_Node* parent;
-    struct I32_Rb_Node* left;
-    struct I32_Rb_Node* right;
-    uint32_t            val;
-    Rb_Node_Color       color;
-} I32_Rb_Node;
+typedef struct Rb_Node {
+    struct Rb_Node* parent;
+    struct Rb_Node* left;
+    struct Rb_Node* right;
+    uint32_t        val;
+    Rb_Node_Color   color;
+} Rb_Node;
 
-I32_Rb_Node* i32_rb_node_new(int root_val);
-void i32_rb_node_free(I32_Rb_Node* root);
-void i32_rb_node_insert(I32_Rb_Node* root, int value);
+Rb_Node* rb_node_new(int root_val, bool is_root);
+void rb_node_free(Rb_Node* root);
+void rb_node_insert(Rb_Node* root, int value);
 
 #endif  // RED_BLACK_TREE_H
