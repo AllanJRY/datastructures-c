@@ -31,19 +31,56 @@ static void fix_violations(Rb_Node* node) {
                     continue; // Continue to check for new violations
                 }
             } else {
-                // Perform rotation :
-                // if left-left or right-right
-                    // parent become black and take the place of grandparent
-                    // grandparent become red and child of parent
-                // if left-right or right-left
-                    // new node become grandparent and black
-                    // grandparent become child of new node and red
+                bool node_is_left        = parent_node->left == node;
+                bool parent_node_is_left = grand_parent_node->left == parent_node;
+                // TODO Check rotation name if it is not inversed.
+                // + Refactor, some logics can be shared between rotations.
+                if (node_is_left && parent_node_is_left) {
+                    // Right rotation
+                    parent_node->parent             = grand_parent_node->parent;
+                    grand_parent_node->parent->left = parent_node;
+                    grand_parent_node->left         = parent_node->right;
+                    grand_parent_node->parent       = parent_node;
+                    parent_node->right              = grand_parent_node;
+                    parent_node->color              = NODE_BLACK;
+                    grand_parent_node->color        = NODE_RED;
+                } else if (node_is_left) {
+                    // Right-Left rotation
+                    grand_parent_node->parent->right = node;
+                    node->parent                     = grand_parent_node->parent;
+                    parent_node->left                = NULL;
+                    node->right                      = parent_node;
+                    node->left                       = grand_parent_node;
+                    grand_parent_node->parent        = node;
+                    node->color                      = NODE_BLACK;
+                    grand_parent_node->color         = NODE_RED;
+                } else if (parent_node_is_left) {
+                    // left-Right rotation
+                    grand_parent_node->parent->left = node;
+                    node->parent                    = grand_parent_node->parent;
+                    parent_node->right              = NULL;
+                    node->right                     = grand_parent_node;
+                    node->left                      = parent_node;
+                    grand_parent_node->parent       = node;
+                    node->color                     = NODE_BLACK;
+                    grand_parent_node->color        = NODE_RED;
+                } else {
+                    // Left rotation
+                    parent_node->parent              = grand_parent_node->parent;
+                    grand_parent_node->parent->right = parent_node;
+                    grand_parent_node->right         = parent_node->left;
+                    grand_parent_node->parent        = parent_node;
+                    parent_node->left                = grand_parent_node;
+                    parent_node->color               = NODE_BLACK;
+                    grand_parent_node->color         = NODE_RED;
+                }
+                break;
             }
         }
     }
 }
 
-Rb_Node* rb_node_new(int root_val, bool is_root) {
+Rb_Node* rb_node_new(uint32_t root_val, bool is_root) {
     Rb_Node* root = (Rb_Node*) malloc(sizeof(Rb_Node));
     if(root == NULL) {
         printf("Unable to allocate memory for the red black tree root node.");
@@ -64,7 +101,7 @@ void rb_node_free(Rb_Node* root) {
 }
 
 
-void rb_node_insert(Rb_Node* root, int val) {
+void rb_node_insert(Rb_Node* root, uint32_t val) {
     // Inset like binary search tree.
     Rb_Node* parent_node = root;
     Rb_Node* child_node = parent_node->val > val ? parent_node->left : parent_node->right;

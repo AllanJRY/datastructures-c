@@ -19,8 +19,8 @@ typedef struct Rb_Node {
     Rb_Node_Color   color;
 } Rb_Node;
 
-Rb_Node* rb_node_new(int root_val, bool is_root);
+Rb_Node* rb_node_new(uint32_t root_val, bool is_root);
 void rb_node_free(Rb_Node* root);
-void rb_node_insert(Rb_Node* root, int value);
+void rb_node_insert(Rb_Node* root, uint32_t value);
 
 #endif  // RED_BLACK_TREE_H
